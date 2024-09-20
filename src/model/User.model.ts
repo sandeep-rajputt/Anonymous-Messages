@@ -21,7 +21,10 @@ const UserSchema: Schema<User> = new Schema(
       type: String,
       required: [true, "Username is required"],
       unique: true,
-      lowercase: true,
+      match: [
+        /^[a-zA-Z0-9_]+$/,
+        "Username can only contain letters, numbers, and underscores",
+      ],
       trim: true,
       minlength: 3,
       maxlength: 20,
@@ -48,7 +51,7 @@ const UserSchema: Schema<User> = new Schema(
     verifyCode: {
       type: Number,
       required: false,
-      expires: 100,
+      expires: 300,
     },
   },
   { timestamps: true }
